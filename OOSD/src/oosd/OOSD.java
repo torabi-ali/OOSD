@@ -5,15 +5,19 @@
  */
 package oosd;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author ali
  */
 public class OOSD {
     
-    DBConnection conn = new DBConnection();
+    static final DBConnection conn = new DBConnection();
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         System.out.println("Hello, World");
+        
+        conn.connect();
     }
 }

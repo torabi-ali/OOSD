@@ -5,12 +5,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBConnection {
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://localhost:3306/";
-
-   static final String DBUSER = "root";
-   static final String DBPASS = "65108105";
-
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/OOSD";
+    private static final String DB_USER = "root";
+    private static final String DB_PASS = "65108105";
+    
+    Connection conn = null;
+   
     public DBConnection() {
         
         try {
@@ -22,7 +23,29 @@ public class DBConnection {
         System.out.println("Connecting to database...");
         
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DBUSER, DBPASS);
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            if (conn != null) {
+                System.out.println("Connected to the database test1");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void connect() {
+        
+        String query = "insert into Users (Id, FirstName, LastName)" + "values (?, ?, ?)";
+        
+        PreparedStatement statement;
+        try {
+            statement = conn.prepareStatement(query);
+            
+            statement.setString(1, "123");
+            statement.setString(2, "asd");
+            statement.setString(3, "asd");
+            
+            statement.execute();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

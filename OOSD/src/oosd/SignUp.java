@@ -5,12 +5,15 @@
  */
 package oosd;
 
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author ali
  */
 public class SignUp {
     User user;
+    DBConnection conn = new DBConnection();
 
     public SignUp(int Id, String FirstName, String LastName) {
         user.setId(Id);
