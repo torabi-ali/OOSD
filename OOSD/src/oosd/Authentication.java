@@ -3,12 +3,12 @@ package oosd;
 import java.util.Scanner;
 
 public class Authentication {
-    Usr user;
-    JsonDB json;
+    Usr user = new Usr();
+    JsonDB json = new JsonDB();
     Scanner input = new Scanner(System.in);
     //DBConnection conn = new DBConnection();
 
-    public void Login(){        
+    public Usr Login() {
         int Id;
         System.out.print("Enter your ID:");
         Id = input.nextInt();
@@ -20,10 +20,18 @@ public class Authentication {
         user.setPassword(Password);
         
         //Should read from database
-        if (Password != null)
+        user = json.ReadUsr(Id);
+        if(user != null)
         {
-            user.setId(Id);
+            if (user.getPassword().equals(Password))
+            {
+                System.out.println("You are Logged in :)");
+                return user;
+            }
+            System.out.println("The Username or Password was not correct");
         }
+        System.out.println("The Username not found");
+        return null;
     }
     
     public void SignUp() {        
@@ -46,8 +54,7 @@ public class Authentication {
         System.out.print("Enter your FirstName:");
         LastName = input.next();
         user.setLastName(LastName);
-        
-        //Should connect to database and insert the data
+
         json.SaveUsr(user);
         
         System.out.println("you are signed up completely ...");

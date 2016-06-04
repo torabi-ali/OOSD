@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Movie {
     
-    private int Id;
-    private String Name;
-    private int Year;
-    private List<String> Genre;
-    private int duration;
-    private String Director;
+    private int Id = 0;
+    private String Name = null;
+    private int Year = 0;
+    private List<String> Genre = null;
+    private int duration = 0;
+    private String Director = null;
     //private List<String> Description;
     
     public void AddMovie() {

@@ -1,11 +1,11 @@
 package oosd;
 
 public class Usr {
-    private int Id;
-    private String Password;
-    private String FirstName;
-    private String LastName;
-    private int Score;
+    private int Id = 0;
+    private String Password = null;
+    private String FirstName = null;
+    private String LastName = null;
+    private int Score = 0;
 
     public int getId() {
         return Id;
