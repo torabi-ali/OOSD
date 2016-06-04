@@ -19,4 +19,44 @@ public class Movie {
     public void Search() {
         System.out.print("It's you movie ...");
     }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public String getDirector() {
+        return Director;
+    }
+
+    public void setDirector(String Director) {
+        this.Director = Director;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getImdb() {
+        return Imdb;
+    }
+
+    public void setImdb(int Imdb) {
+        this.Imdb = Imdb;
+    }
 }
