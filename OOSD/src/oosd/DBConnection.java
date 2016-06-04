@@ -32,7 +32,7 @@ public class DBConnection {
         }
     }
     
-    public void connect() {
+    public void test() {
         
         String query = "insert into Users (Id, FirstName, LastName)" + "values (?, ?, ?)";
         
@@ -40,9 +40,9 @@ public class DBConnection {
         try {
             statement = conn.prepareStatement(query);
             
-            statement.setString(1, "123");
-            statement.setString(2, "asd");
-            statement.setString(3, "asd");
+            statement.setString(1, "1");
+            statement.setString(2, "Ali");
+            statement.setString(3, "Torabi");
             
             statement.execute();
             conn.close();
