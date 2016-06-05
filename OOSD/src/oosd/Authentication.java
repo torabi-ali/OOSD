@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Authentication {
     Usr user;
+    JsonDB json;
+    Scanner input = new Scanner(System.in);
     //DBConnection conn = new DBConnection();
 
-    public void Login(){
-        Scanner input = new Scanner(System.in);
-        
+    public void Login(){        
         int Id;
         System.out.print("Enter your ID:");
         Id = input.nextInt();
@@ -26,9 +26,7 @@ public class Authentication {
         }
     }
     
-    public void SignUp() {
-        Scanner input = new Scanner(System.in);
-        
+    public void SignUp() {        
         int Id;
         System.out.print("Enter your ID:");
         Id = input.nextInt();
@@ -50,6 +48,7 @@ public class Authentication {
         user.setLastName(LastName);
         
         //Should connect to database and insert the data
+        json.SaveUsr(user);
         
         System.out.println("you are signed up completely ...");
     }

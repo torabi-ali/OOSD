@@ -31,23 +31,4 @@ public class DBConnection {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void test() {
-        
-        String query = "insert into Users (Id, FirstName, LastName)" + "values (?, ?, ?)";
-        
-        PreparedStatement statement;
-        try {
-            statement = conn.prepareStatement(query);
-            
-            statement.setString(1, "1");
-            statement.setString(2, "Ali");
-            statement.setString(3, "Torabi");
-            
-            statement.execute();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
