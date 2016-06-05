@@ -16,27 +16,29 @@ public class OOSD {
             case 1:
                 if (user.getId() > 0)
                 {
-                    movie.AddMovie();
+                    auth.AddMovie();
                 }
                 else
                 {
                     System.out.println("First you must sign in");
-                    auth.SignUp();
+                    auth.Login();
+                    auth.AddMovie();
                 }
                 break;
             case 2:
                 if (user.getId() > 0)
                 {
-                    movie.EditMovie();
+                    //movie.EditMovie();
                 }
                 else
                 {
                     System.out.println("First you must sign in");
-                    auth.SignUp();
+                    auth.Login();
+                    //movie.EditMovie();
                 }
                 break;
             case 3:
-                movie.Search();
+                auth.Search();
                 break;
             case 4:
                 auth.Login();
@@ -45,6 +47,7 @@ public class OOSD {
                 auth.SignUp();
                 break;
             case 6:
+                System.out.println("Hope to see you soon :)");
                 System.exit(0);
                 break;
             default:
@@ -57,14 +60,14 @@ public class OOSD {
         int selection;
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Please order us ...");
-        System.out.println("-------------------------\n");
+        System.out.println("< ------------------------- >");
         System.out.println("1 - Sign in a Movie");
         System.out.println("2 - Edit a Movie");
         System.out.println("3 - Search");
         System.out.println("4 - Login");
         System.out.println("5 - Sign Up");
         System.out.println("6 - Quit");
+        System.out.println("< ------------------------- >");
 
         selection = input.nextInt();
         return selection;
