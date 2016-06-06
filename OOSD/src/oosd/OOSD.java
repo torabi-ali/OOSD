@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class OOSD {
 
-    static final Authentication auth = new Authentication();
+    static final DBDriver auth = new DBDriver();
     static final Usr user = new Usr();
     static final Movie movie = new Movie();
 
@@ -17,24 +17,28 @@ public class OOSD {
                 if (user.getId() > 0)
                 {
                     auth.AddMovie();
+                    main(args);
                 }
                 else
                 {
                     System.out.println("First you must sign in");
                     auth.Login();
                     auth.AddMovie();
+                    main(args);
                 }
                 break;
             case 2:
                 if (user.getId() > 0)
                 {
                     //movie.EditMovie();
+                    main(args);
                 }
                 else
                 {
                     System.out.println("First you must sign in");
                     auth.Login();
                     //movie.EditMovie();
+                    main(args);
                 }
                 break;
             case 3:
@@ -42,9 +46,11 @@ public class OOSD {
                 break;
             case 4:
                 auth.Login();
+                main(args);
                 break;
             case 5:
                 auth.SignUp();
+                auth.Login();
                 break;
             case 6:
                 System.out.println("Hope to see you soon :)");

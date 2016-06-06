@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Authentication {
+public class DBDriver {
     Usr user = new Usr();
     JsonDB json = new JsonDB();
     Scanner input = new Scanner(System.in);
@@ -51,8 +51,29 @@ public class Authentication {
     public void Search() {
         Movie movie = new Movie();
         
-        System.out.println("Enter the Name:");
-        System.out.println(json.Search(input.next()));
+        if (user.getId() > 0)
+        {
+            System.out.println("fill the fields with \\null exclude from search");
+            System.out.println("Enter the Name:");
+            if (input.next() != "null")
+            {
+                movie.setName(input.next());
+            }
+            
+            System.out.println("Enter the Director:");
+            if (input.next() != "null")
+            {
+                movie.setDirector(input.next());
+            }
+            
+            System.out.println(json.Search(movie));
+        }
+        else
+        {
+            System.out.println("Enter the Name:");
+            movie.setName(input.next());
+            System.out.println(json.Search(movie));
+        }
     }
     
     public Usr Login() {
@@ -97,7 +118,7 @@ public class Authentication {
         user.setFirstName(FirstName);
         
         String LastName;
-        System.out.print("Enter your FirstName:");
+        System.out.print("Enter your LastName:");
         LastName = input.next();
         user.setLastName(LastName);
 

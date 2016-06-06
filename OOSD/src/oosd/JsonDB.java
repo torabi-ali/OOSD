@@ -1,11 +1,14 @@
 package oosd;
 
 import com.google.gson.Gson;
+import com.sun.accessibility.internal.resources.accessibility;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonDB {
     private final Gson gson = new Gson();
@@ -60,17 +63,26 @@ public class JsonDB {
         }
     }
     
-    public Movie Search(String Name){
-        Movie movie = new Movie();
+    public List<Movie> Search(Movie movie){
+        List<Movie> result = new ArrayList<>();
+        Movie tmp = new Movie();
         
         File[] files = new File("database/movies/").listFiles();
         for (File file : files)
         {
-            if (Name.equals(file.getName()))
+            tmp = ReadMovie(file.getName());
+            
+            if (movie.getName() != null && movie.getName().equals(tmp.getName()))
             {
-                movie = ReadMovie(Name);
-                return movie;
+                movie = ReadMovie(movie.getName());
+                result.add(movie);
             }
+            if (movie.getDirector()!= null && movie.getDirector().equals(tmp.getDirector()))
+            {
+                movie = ReadMovie(movie.getName());
+                result.add(movie);
+            }
+            return result;
         }
         return null;
     }
