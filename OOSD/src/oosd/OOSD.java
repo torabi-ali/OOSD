@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class OOSD {
 
     static final DBDriver auth = new DBDriver();
+    static final DBConnection db = new DBConnection();
     static final Usr user = new Usr();
     static final Movie movie = new Movie();
 
