@@ -1,21 +1,29 @@
 package oosd;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MovieController {
     Movie movie;
     JsonDB json;
+    SqlDB sql;
     Scanner input = new Scanner(System.in);
     
     public MovieController() {
         movie = new Movie();
         json = new JsonDB();
+        sql = new SqlDB();
     }
     
     public void AddMovie() {
-        char gnr;
+        char gnr = 'y';
+
+        System.out.print("Enter Id:");
+        movie.setId(input.nextInt());
         
         System.out.print("Enter Name:");
         movie.setName(input.next());
@@ -29,14 +37,24 @@ public class MovieController {
         List<String> genres = new ArrayList<>();
         System.out.print("Enter Genre:");
         genres.add(input.next());
-        System.out.print("Do You Want to Add More Genres?(Y/N)");
-        gnr = input.next().charAt(0);
-        while (gnr == 'y')
+        
+        while (gnr == 'y' || gnr == 'Y')
         {
-            System.out.print("Enter Genre:");
-            genres.add(input.next());
             System.out.print("Do You Want to Add More Genres?(Y/N)");
             gnr = input.next().charAt(0);
+            switch (gnr) {
+                case 'y':
+                case 'Y':
+                    System.out.print("Enter Genre:");
+                    genres.add(input.next());
+                    break;
+                case 'n':
+                case 'N':
+                    gnr = 'n';
+                    break;
+                default:
+                    System.out.print("That was not my asnwer!");
+            }
         }
         movie.setGenre(genres);
 
@@ -47,6 +65,12 @@ public class MovieController {
         movie.setDescription(input.next());
         
         json.Save(movie);
+        
+        try {
+            sql.Save(movie);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         System.out.print("The Movie Added ...");
     }

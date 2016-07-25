@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Movie {
 
+    private int Id;
     private String Name;
     private int Year;
     private List<String> Genre;
@@ -13,6 +14,7 @@ public class Movie {
     private String Description;
     
     public Movie() {
+        Id = 0;
         Name = null;
         Director = null;
         Year = 0;
@@ -21,6 +23,15 @@ public class Movie {
         Description = null;
     }
 
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+    
     public String getName() {
         return Name;
     }
