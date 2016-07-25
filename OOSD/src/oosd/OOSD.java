@@ -3,11 +3,8 @@ package oosd;
 import java.util.Scanner;
 
 public class OOSD {
-
-    static final DBDriver auth = new DBDriver();
-    static final DBConnection db = new DBConnection();
-    static final Usr user = new Usr();
-    static final Movie movie = new Movie();
+    static final AccountController accountController = new AccountController();
+    static final MovieController movieController = new MovieController();
 
     public static void main(String[] args) {
         int userChoice;
@@ -15,21 +12,21 @@ public class OOSD {
                 
         switch (userChoice) {
             case 1:
-                if (user.getId() > 0)
+                if (accountController.account != null)
                 {
-                    auth.AddMovie();
+                    movieController.AddMovie();
                     main(args);
                 }
                 else
                 {
                     System.out.println("First you must sign in");
-                    auth.Login();
-                    auth.AddMovie();
+                    accountController.Login();
+                    movieController.AddMovie();
                     main(args);
                 }
                 break;
             case 2:
-                if (user.getId() > 0)
+                if (accountController.account != null)
                 {
                     //movie.EditMovie();
                     main(args);
@@ -37,21 +34,21 @@ public class OOSD {
                 else
                 {
                     System.out.println("First you must sign in");
-                    auth.Login();
+                    accountController.Login();
                     //movie.EditMovie();
                     main(args);
                 }
                 break;
             case 3:
-                auth.Search();
+                //movieController.Search();
                 break;
             case 4:
-                auth.Login();
+                accountController.Login();
                 main(args);
                 break;
             case 5:
-                auth.SignUp();
-                auth.Login();
+                accountController.SignUp();
+                accountController.Login();
                 break;
             case 6:
                 System.out.println("Hope to see you soon :)");

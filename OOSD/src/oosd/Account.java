@@ -1,6 +1,6 @@
 package oosd;
 
-public class Usr {
+public class Account {
     private int Id = 0;
     private String Password = null;
     private String FirstName = null;
