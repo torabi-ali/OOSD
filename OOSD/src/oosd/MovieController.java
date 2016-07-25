@@ -1,22 +1,17 @@
 package oosd;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static oosd.OOSD.db;
 
 public class MovieController {
+    Scanner input;
     Movie movie;
-    JsonDB json;
-    SqlDB sql;
-    Scanner input = new Scanner(System.in);
     
     public MovieController() {
-        movie = new Movie();
-        json = new JsonDB();
-        sql = new SqlDB();
+        this.input = new Scanner(System.in);
+        this.movie = new Movie();
     }
     
     public void AddMovie() {
@@ -64,13 +59,7 @@ public class MovieController {
         System.out.print("Enter Description:");
         movie.setDescription(input.next());
         
-        json.Save(movie);
-        
-        try {
-            sql.Save(movie);
-        } catch (SQLException ex) {
-            Logger.getLogger(MovieController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        db.Save(movie);
         
         System.out.print("The Movie Added ...");
     }

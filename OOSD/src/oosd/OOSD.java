@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class OOSD {
     static final AccountController accountController = new AccountController();
     static final MovieController movieController = new MovieController();
+    static final DBDriver db = new DBDriver();
 
     public static void main(String[] args) {
         int userChoice;
@@ -12,7 +13,7 @@ public class OOSD {
                 
         switch (userChoice) {
             case 1:
-                if (accountController.account != null)
+                if (accountController.account.getId() > 0)
                 {
                     movieController.AddMovie();
                     main(args);
@@ -26,7 +27,7 @@ public class OOSD {
                 }
                 break;
             case 2:
-                if (accountController.account != null)
+                if (accountController.account.getId() > 0)
                 {
                     //movie.EditMovie();
                     main(args);
@@ -48,6 +49,7 @@ public class OOSD {
                 break;
             case 5:
                 accountController.SignUp();
+                System.out.println("Please Login ...");
                 accountController.Login();
                 break;
             case 6:

@@ -1,15 +1,15 @@
 package oosd;
 
 import java.util.Scanner;
+import static oosd.OOSD.db;
 
 public class AccountController {
+    Scanner input;
     Account account;
-    JsonDB json;
-    Scanner input = new Scanner(System.in);
     
     public AccountController() {
-        account = new Account();
-        json = new JsonDB();
+        this.input = new Scanner(System.in);
+        this.account = new Account();
     }
     
     public Account Login() {
@@ -23,7 +23,7 @@ public class AccountController {
         Password = input.next();
         account.setPassword(Password);
         
-        account = json.Read(Id);
+        account = db.Read(Id);
         if(account != null)
         {
             if (account.getPassword().equals(Password))
@@ -57,8 +57,8 @@ public class AccountController {
         System.out.print("Enter your LastName:");
         LastName = input.next();
         account.setLastName(LastName);
-
-        json.Save(account);
+        
+        db.Save(account);
         
         System.out.println("you are signed up completely ...");
     }

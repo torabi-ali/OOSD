@@ -10,18 +10,23 @@ import java.io.PrintWriter;
 import java.io.Reader;
 
 public class JsonDB {
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private String str = null;
+    private final Gson gson;
+    private String addr;
+    
+    public JsonDB() {
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        this.addr = null;
+    }
 
     public Movie Read(String Name) {
         System.out.println("Loading ...");
         
         Movie movie = new Movie();
-        str = "database/movies.json";
-        try (Reader reader = new FileReader(str)) {
+        addr = "database/movies.json";
+        try (Reader reader = new FileReader(addr)) {
             movie = gson.fromJson(reader, Movie.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("We couldn't read data from Json :(");
         }
         
         return movie;
@@ -31,11 +36,11 @@ public class JsonDB {
         System.out.println("Loading ...");
         
         Account user = new Account();
-        str = "database/users.json";
-        try (Reader reader = new FileReader(str)) {
+        addr = "database/users.json";
+        try (Reader reader = new FileReader(addr)) {
             user = gson.fromJson(reader, Account.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("We couldn't read data from Json :(");
         }
         
         return user;
@@ -45,33 +50,29 @@ public class JsonDB {
         System.out.println("Saving ...");
         
         String json = gson.toJson(user);
-        System.out.println(json);
-        str = "database/users.json";
-        try(FileWriter writer = new FileWriter(str, true);
+        addr = "database/users.json";
+        try(FileWriter writer = new FileWriter(addr, true);
             BufferedWriter bw = new BufferedWriter(writer);
             PrintWriter out = new PrintWriter(bw)) {
             gson.toJson(user, writer);
+            System.out.println("Saved Seccessfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("We couldn't save data to Json :(");
         }
-
-        System.out.println("Saved Seccessfully");
     }
     
     public void Save(Movie movie) {
         System.out.println("Saving ...");
         
         String json = gson.toJson(movie);
-        System.out.println(json);
-        str = "database/movies.json";
-        try(FileWriter writer = new FileWriter(str, true);
+        addr = "database/movies.json";
+        try(FileWriter writer = new FileWriter(addr, true);
             BufferedWriter bw = new BufferedWriter(writer);
             PrintWriter out = new PrintWriter(bw)) {
             gson.toJson(movie, writer);
+            System.out.println("Saved Seccessfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("We couldn't save data to Json :(");
         }
-        
-        System.out.println("Saved Seccessfully");
     }
 }

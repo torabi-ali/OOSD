@@ -1,11 +1,19 @@
 package oosd;
 
 public class Account {
-    private int Id = 0;
-    private String Password = null;
-    private String FirstName = null;
-    private String LastName = null;
-    private int Score = 0;
+    private int Id;
+    private String Password;
+    private String FirstName;
+    private String LastName;
+    private int Score;
+
+    public Account() {
+        this.Id = 0;
+        this.Password = null;
+        this.FirstName = null;
+        this.LastName = null;
+        this.Score = 0;
+    }
 
     public int getId() {
         return Id;
