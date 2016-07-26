@@ -35,15 +35,15 @@ public class JsonDB {
     public Account Read(int Id) {
         System.out.println("Loading ...");
         
-        Account user = new Account();
+        Account account = new Account();
         addr = "database/users.json";
         try (Reader reader = new FileReader(addr)) {
-            user = gson.fromJson(reader, Account.class);
+            account = gson.fromJson(reader, Account.class);
         } catch (IOException e) {
             System.out.println("We couldn't read data from Json :(");
         }
         
-        return user;
+        return account;
     }
     
     public void Save(Account user) {

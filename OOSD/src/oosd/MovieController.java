@@ -63,4 +63,13 @@ public class MovieController {
         
         System.out.print("The Movie Added ...");
     }
+    
+    public Movie Read() {
+        System.out.print("Enter Id:");
+        int Id = input.nextInt();
+        
+        movie = db.ReadMovie(Id);
+        
+        return movie;
+    }
 }

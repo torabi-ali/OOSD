@@ -23,8 +23,9 @@ public class AccountController {
         Password = input.next();
         account.setPassword(Password);
         
-        account = db.Read(Id);
-        if(account != null)
+        account = db.ReadAccount(Id);
+        
+        if(account.getId() > 0)
         {
             if (account.getPassword().equals(Password))
             {
@@ -33,7 +34,10 @@ public class AccountController {
             }
             System.out.println("The Username or Password was not correct");
         }
-        System.out.println("The Username not found");
+        else
+        {
+            System.out.println("The Username not found");
+        }
         return null;
     }
     

@@ -41,7 +41,7 @@ public class OOSD {
                 }
                 break;
             case 3:
-                //movieController.Search();
+                movieController.Read();
                 break;
             case 4:
                 accountController.Login();

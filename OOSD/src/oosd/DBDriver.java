@@ -15,9 +15,24 @@ public class DBDriver {
         this.sql = new SqlDB();
     }
     
-    public Account Read(int Id) {
-        account = json.Read(Id);
+    public Account ReadAccount(int Id) {
+        try {
+            account = sql.ReadAccount(Id);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return account;
+    }
+    
+    public Movie ReadMovie(int Id) {
+        try {
+            movie = sql.ReadMovie(Id);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return movie;
     }
     
     public void Save(Movie movie) {

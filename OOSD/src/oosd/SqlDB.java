@@ -1,6 +1,9 @@
 package oosd;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,6 +15,9 @@ public class SqlDB {
     private static String DB_USER;
     private static String DB_PASS;
 
+    Account account;
+    Movie movie;
+    
     public SqlDB() {
         this.query = null;
         this.conn = null;
@@ -19,6 +25,9 @@ public class SqlDB {
         SqlDB.DB_URL = "jdbc:mysql://localhost:3306/OOSD?autoReconnect=true&useSSL=false";
         SqlDB.DB_USER = "root";
         SqlDB.DB_PASS = "65108105";
+        
+        account = new Account();
+        movie = new Movie();
         
         try {
             Class.forName(JDBC_DRIVER);
@@ -38,6 +47,58 @@ public class SqlDB {
         }
     }
 
+    public Account ReadAccount(int Id) throws SQLException {
+        System.out.println("Loading ...");
+
+        query = "select * from Users where id = ?";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setInt(1, Id);
+        ResultSet rs = preparedStmt.executeQuery();
+        
+        while (rs.next())
+        {
+            account.setId(Id);
+            account.setFirstName(rs.getString("FirstName"));
+            account.setLastName(rs.getString("LastName"));
+            account.setScore(rs.getInt("Score"));
+            account.setPassword(rs.getString("Password"));
+        }
+        
+        return account;
+    }
+    
+    public Movie ReadMovie(int Id) throws SQLException {
+        System.out.println("Loading ...");
+
+        query = "select * from Movies where id = ?";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setInt(1, Id);
+        ResultSet rs = preparedStmt.executeQuery();
+        
+        while (rs.next())
+        {
+            movie.setId(Id);
+            movie.setName(rs.getString("Name"));
+            movie.setDirector(rs.getString("Director"));
+            movie.setYear(rs.getInt("Year"));
+            movie.setDescription(rs.getString("Description"));
+            movie.setDuration(rs.getInt("Duration"));
+            
+            String comma = ",";
+            String allGenres = rs.getString("Genre");
+            List<String> Genre = new ArrayList<>();
+            String []Gnr = allGenres.split(comma);
+            
+            Genre.addAll(Arrays.asList(Gnr));
+            movie.setGenre(Genre);
+        }
+        
+        return movie;
+    }
+    
+    
     public void Save(Account user) throws SQLException {
         System.out.println("Saving ...");
 
@@ -61,7 +122,7 @@ public class SqlDB {
         for (String g: movie.getGenre()) {
             allGenres.append(comma);
             allGenres.append(g);
-            comma = ", ";
+            comma = ",";
         }
 
         query = "insert into Movies (Name, Year, Genre, Duration, Director, Description)"
