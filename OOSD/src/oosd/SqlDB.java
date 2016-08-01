@@ -68,6 +68,37 @@ public class SqlDB {
         return account;
     }
     
+    public Object ReadAllMovies() throws SQLException {
+        List<Movie> movies = new ArrayList<Movie>();
+        
+        query = "select * from Movies";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        ResultSet rs = preparedStmt.executeQuery();
+        
+        while (rs.next())
+        {
+            movie.setId(rs.getInt("Id"));
+            movie.setName(rs.getString("Name"));
+            movie.setDirector(rs.getString("Director"));
+            movie.setYear(rs.getInt("Year"));
+            movie.setDescription(rs.getString("Description"));
+            movie.setDuration(rs.getInt("Duration"));
+            
+            String comma = ",";
+            String allGenres = rs.getString("Genre");
+            List<String> Genre = new ArrayList<>();
+            String []Gnr = allGenres.split(comma);
+            
+            Genre.addAll(Arrays.asList(Gnr));
+            movie.setGenre(Genre);
+            
+            movies.add(movie);
+        }
+        
+        return movies;
+    }
+    
     public Movie ReadMovie(int Id) throws SQLException {
         System.out.println("Loading ...");
 

@@ -41,6 +41,7 @@ public class OOSD {
                 }
                 break;
             case 3:
+                movieController.ReadAll();
                 movieController.Read();
                 break;
             case 4:

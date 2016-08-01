@@ -14,12 +14,12 @@ public class AccountController {
     
     public Account Login() {
         int Id;
-        System.out.print("Enter your ID:");
+        System.out.println("Enter your ID:");
         Id = input.nextInt();
         account.setId(Id);
 
         String Password;
-        System.out.print("Enter your Password:");
+        System.out.println("Enter your Password:");
         Password = input.next();
         account.setPassword(Password);
         
@@ -43,22 +43,22 @@ public class AccountController {
     
     public void SignUp() {        
         int Id;
-        System.out.print("Enter your ID:");
+        System.out.println("Enter your ID:");
         Id = input.nextInt();
         account.setId(Id);
 
         String Password;
-        System.out.print("Enter your Password:");
+        System.out.println("Enter your Password:");
         Password = input.next();
         account.setPassword(Password);
         
         String FirstName;
-        System.out.print("Enter your FirstName:");
+        System.out.println("Enter your FirstName:");
         FirstName = input.next();
         account.setFirstName(FirstName);
         
         String LastName;
-        System.out.print("Enter your LastName:");
+        System.out.println("Enter your LastName:");
         LastName = input.next();
         account.setLastName(LastName);
         

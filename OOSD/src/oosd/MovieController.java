@@ -17,30 +17,30 @@ public class MovieController {
     public void AddMovie() {
         char gnr = 'y';
 
-        System.out.print("Enter Id:");
+        System.out.println("Enter Id:");
         movie.setId(input.nextInt());
         
-        System.out.print("Enter Name:");
+        System.out.println("Enter Name:");
         movie.setName(input.next());
         
-        System.out.print("Enter Director:");
+        System.out.println("Enter Director:");
         movie.setDirector(input.next());
         
-        System.out.print("Enter Year:");
+        System.out.println("Enter Year:");
         movie.setYear(input.nextInt());
         
         List<String> genres = new ArrayList<>();
-        System.out.print("Enter Genre:");
+        System.out.println("Enter Genre:");
         genres.add(input.next());
         
         while (gnr == 'y' || gnr == 'Y')
         {
-            System.out.print("Do You Want to Add More Genres?(Y/N)");
+            System.out.println("Do You Want to Add More Genres?(Y/N)");
             gnr = input.next().charAt(0);
             switch (gnr) {
                 case 'y':
                 case 'Y':
-                    System.out.print("Enter Genre:");
+                    System.out.println("Enter Genre:");
                     genres.add(input.next());
                     break;
                 case 'n':
@@ -48,28 +48,40 @@ public class MovieController {
                     gnr = 'n';
                     break;
                 default:
-                    System.out.print("That was not my asnwer!");
+                    System.out.println("That was not my asnwer!");
             }
         }
         movie.setGenre(genres);
 
-        System.out.print("Enter Duration:");
+        System.out.println("Enter Duration:");
         movie.setDuration(input.nextInt());
         
-        System.out.print("Enter Description:");
+        System.out.println("Enter Description:");
         movie.setDescription(input.next());
         
         db.Save(movie);
         
-        System.out.print("The Movie Added ...");
+        System.out.println("The Movie Added ...");
     }
     
     public Movie Read() {
-        System.out.print("Enter Id:");
+        System.out.println("Enter Id:");
         int Id = input.nextInt();
         
         movie = db.ReadMovie(Id);
         
         return movie;
+    }
+    
+    public void ReadAll() {        
+        System.out.println("Here are the whole movies:");
+        List<Movie> movies = new ArrayList<Movie>();
+        
+        movies = (List<Movie>) db.ReadAllMovies();
+        
+        for(Movie all_movie: movies)
+        {   
+            System.out.print(all_movie.toString());
+        }
     }
 }

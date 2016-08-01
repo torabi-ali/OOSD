@@ -79,4 +79,17 @@ public class Movie {
     public void setDescription(String Description) {
         this.Description = Description;
     }
+    
+    @Override
+    public String toString(){
+      return "\n----------"+
+             "\nID: "+ getId()+
+             "\nName: "+ getName()+
+             "\nYear: "+ getYear()+
+             "\nDirector: "+ getDirector()+
+             "\nGenre: "+ getGenre()+
+             "\nDuration: "+ getDuration()+
+             "\nDescription: "+ getDescription()+
+             "\n----------";
+    }
 }

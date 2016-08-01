@@ -1,6 +1,8 @@
 package oosd;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +35,18 @@ public class DBDriver {
         }
         
         return movie;
+    }
+
+    public Object ReadAllMovies() {
+        List<Movie> movies = new ArrayList<Movie>();
+        
+        try {
+            movies = (List<Movie>) sql.ReadAllMovies();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return movies;
     }
     
     public void Save(Movie movie) {
