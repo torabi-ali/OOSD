@@ -29,19 +29,20 @@ public class OOSD {
             case 2:
                 if (accountController.account.getId() > 0)
                 {
-                    //movie.EditMovie();
+                    movieController.Edit();
                     main(args);
                 }
                 else
                 {
                     System.out.println("First you must sign in");
                     accountController.Login();
-                    //movie.EditMovie();
+                    movieController.Edit();
                     main(args);
                 }
                 break;
             case 3:
                 movieController.ReadAll();
+                System.out.println("Let's search for it ...");
                 movieController.Read();
                 break;
             case 4:

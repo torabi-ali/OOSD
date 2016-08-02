@@ -78,6 +78,7 @@ public class SqlDB {
         
         while (rs.next())
         {
+            movie = new Movie();
             movie.setId(rs.getInt("Id"));
             movie.setName(rs.getString("Name"));
             movie.setDirector(rs.getString("Director"));
@@ -129,6 +130,36 @@ public class SqlDB {
         return movie;
     }
     
+    public void Search() {
+        
+    }
+    
+    public void Edit(Movie movie) throws SQLException {
+        System.out.println("Saving ...");
+        
+        String comma="";
+        StringBuilder allGenres = new StringBuilder();
+        for (String g: movie.getGenre()) {
+            allGenres.append(comma);
+            allGenres.append(g);
+            comma = ",";
+        }
+        
+        query = "update Movies set Name = ?, Year = ?, Genre = ?, Duration = ?, "
+                + "Director = ?, Description = ? where id = ?";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setString (1, movie.getName());
+        preparedStmt.setInt(2, movie.getYear());
+        preparedStmt.setString (3, allGenres.toString());
+        preparedStmt.setInt(4, movie.getDuration());
+        preparedStmt.setString (5, movie.getDirector());
+        preparedStmt.setString (6, movie.getDescription());
+        preparedStmt.setInt(7, movie.getId());
+
+        preparedStmt.executeUpdate();
+        
+    }
     
     public void Save(Account user) throws SQLException {
         System.out.println("Saving ...");

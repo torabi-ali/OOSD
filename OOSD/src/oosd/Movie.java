@@ -81,8 +81,8 @@ public class Movie {
     }
     
     @Override
-    public String toString(){
-      return "\n----------"+
+    public String toString() {
+      return "\n------------------------------"+
              "\nID: "+ getId()+
              "\nName: "+ getName()+
              "\nYear: "+ getYear()+
@@ -90,6 +90,6 @@ public class Movie {
              "\nGenre: "+ getGenre()+
              "\nDuration: "+ getDuration()+
              "\nDescription: "+ getDescription()+
-             "\n----------";
+             "\n------------------------------\n";
     }
 }

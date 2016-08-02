@@ -54,4 +54,14 @@ public class Account {
     public void setScore(int Score) {
         this.Score = Score;
     }
+    
+    @Override
+    public String toString() {
+      return "\n------------------------------"+
+             "\nID: "+ getId()+
+             "\nName: "+ getFirstName()+
+             "\nYear: "+ getLastName()+
+             "\nDirector: "+ getScore()+
+             "\n------------------------------\n";
+    }    
 }

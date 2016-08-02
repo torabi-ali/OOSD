@@ -1,6 +1,7 @@
 package oosd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import static oosd.OOSD.db;
@@ -15,6 +16,7 @@ public class MovieController {
     }
     
     public void AddMovie() {
+        this.movie = new Movie();
         char gnr = 'y';
 
         System.out.println("Enter Id:");
@@ -79,9 +81,155 @@ public class MovieController {
         
         movies = (List<Movie>) db.ReadAllMovies();
         
-        for(Movie all_movie: movies)
-        {   
-            System.out.print(all_movie.toString());
+        System.out.println(Arrays.toString(movies.toArray()));
+
+    }
+    
+    public Movie Search() {
+        this.movie = new Movie();
+        char gnr = 'y';
+        System.out.println("Fill the Fieds You Want to Search");
+        
+        System.out.println("Now Enter the Values ...\nPlace \'0\' or enter the new value");
+        
+        System.out.println("Enter Name:");
+        String Name = input.next();
+        if(!Name.equals("0"))
+        {
+            movie.setName(input.next());
         }
+        
+        System.out.println("Enter Director:");
+        String Director = input.next();
+        if(!Director.equals("0"))
+        {
+            movie.setDirector(input.next());
+        }
+        
+        System.out.println("Enter Year:");
+        int Year = input.nextInt();
+        if(Year != 0)
+        {
+            movie.setYear(Year);
+        }
+        
+        List<String> genres = new ArrayList<>();
+        String Genre1 = input.next();
+        if(!Genre1.equals("0"))
+        {
+            System.out.println("Enter Genre:");
+            genres.add(Genre1);
+        
+            while (gnr == 'y' || gnr == 'Y')
+            {
+                System.out.println("Do You Want to Add More Genres?(Y/N)");
+                gnr = input.next().charAt(0);
+                switch (gnr) {
+                    case 'y':
+                    case 'Y':
+                        System.out.println("Enter Genre:");
+                        genres.add(input.next());
+                        break;
+                    case 'n':
+                    case 'N':
+                        gnr = 'n';
+                        break;
+                    default:
+                        System.out.println("That was not my answer!");
+                }
+            }
+            movie.setGenre(genres);
+        }
+        
+        System.out.println("Enter Duration:");
+        int Duration = input.nextInt();
+        if(Duration != 0)
+        {
+            movie.setDuration(Duration);
+        }
+        
+        System.out.println("Enter Description:");
+        String Description = input.next();
+        if(!Description.equals("0"))
+        {
+            movie.setDescription(Description);
+        }
+        
+        return movie;
+    }
+    
+    public void Edit() {
+        char gnr = 'y';
+        movie = Read();
+        System.out.print(movie.toString());
+        
+        System.out.println("Now Enter the new Values ...\nPlace \'0\' or enter the new value");
+        
+        System.out.println("Enter Name:");
+        String Name = input.next();
+        if(!Name.equals("0"))
+        {
+            movie.setName(input.next());
+        }
+        
+        System.out.println("Enter Director:");
+        String Director = input.next();
+        if(!Director.equals("0"))
+        {
+            movie.setDirector(input.next());
+        }
+        
+        System.out.println("Enter Year:");
+        int Year = input.nextInt();
+        if(Year != 0)
+        {
+            movie.setYear(Year);
+        }
+        
+        List<String> genres = new ArrayList<>();
+        String Genre1 = input.next();
+        if(!Genre1.equals("0"))
+        {
+            System.out.println("Enter Genre:");
+            genres.add(Genre1);
+        
+            while (gnr == 'y' || gnr == 'Y')
+            {
+                System.out.println("Do You Want to Add More Genres?(Y/N)");
+                gnr = input.next().charAt(0);
+                switch (gnr) {
+                    case 'y':
+                    case 'Y':
+                        System.out.println("Enter Genre:");
+                        genres.add(input.next());
+                        break;
+                    case 'n':
+                    case 'N':
+                        gnr = 'n';
+                        break;
+                    default:
+                        System.out.println("That was not my answer!");
+                }
+            }
+            movie.setGenre(genres);
+        }
+        
+        System.out.println("Enter Duration:");
+        int Duration = input.nextInt();
+        if(Duration != 0)
+        {
+            movie.setDuration(Duration);
+        }
+        
+        System.out.println("Enter Description:");
+        String Description = input.next();
+        if(!Description.equals("0"))
+        {
+            movie.setDescription(Description);
+        }
+        
+        db.Edit(movie);
+        
+        System.out.println("The Movie Edited ...");
     }
 }
