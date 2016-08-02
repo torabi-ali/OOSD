@@ -50,6 +50,18 @@ public class DBDriver {
         return movies;
     }
     
+    public Object Search(Movie movie) {
+        List<Movie> movies = new ArrayList<Movie>();
+        
+        try {
+            movies = (List<Movie>) sql.Search(movie);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return movies;
+    }
+    
     public void Edit(Movie movie) {
         try {
             sql.Edit(movie);

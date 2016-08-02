@@ -19,6 +19,7 @@ public class Movie {
         Director = null;
         Year = 0;
         Genre = new ArrayList<>();
+        Genre = null;
         Duration = 0;        
         Description = null;
     }

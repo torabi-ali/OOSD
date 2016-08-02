@@ -43,7 +43,7 @@ public class OOSD {
             case 3:
                 movieController.ReadAll();
                 System.out.println("Let's search for it ...");
-                movieController.Read();
+                movieController.Search();
                 break;
             case 4:
                 accountController.Login();

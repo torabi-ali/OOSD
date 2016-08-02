@@ -130,8 +130,100 @@ public class SqlDB {
         return movie;
     }
     
-    public void Search() {
+    public Object Search(Movie movie) throws SQLException {
+        List<Movie> movies = new ArrayList<Movie>();
+        int counter = 0;
+        System.out.println("Saving ...");
         
+        String comma="";
+        StringBuilder allGenres = new StringBuilder();
+        if(movie.getGenre() == null)
+        {
+            allGenres = null;
+        }
+        else
+        {
+            for (String g: movie.getGenre())
+            {
+                allGenres.append(comma);
+                allGenres.append(g);
+                comma = ",";
+            }
+        }
+        
+        query = "select * from Movies where ";
+        
+        if(movie.getName() != null)
+        {
+            query += "Name = "+ '\''+ movie.getName()+ '\'';
+            counter++;
+        }
+        if(movie.getDirector()!= null)
+        {
+            if(counter != 0)
+            {
+                query += " and ";
+                counter--;
+            }
+            query += "Director = "+ '\''+ movie.getDirector()+ '\'';
+            counter++;
+        }    
+        if(movie.getYear()!= 0)
+        {
+            if(counter != 0)
+            {
+                query += " and ";
+                counter--;
+            }
+            query += "Year = "+ movie.getYear();
+            counter++;
+        }    
+        if(allGenres != null)
+        {
+            if(counter != 0)
+            {
+                query += " and ";
+                counter--;
+            }
+            query += "Genre = "+ allGenres;
+            counter++;
+        }     
+        if(movie.getDuration()!= 0)
+        {
+            if(counter != 0)
+            {
+                query += " and ";
+                counter--;
+            }
+            query += "Duration = "+ movie.getDuration();
+            counter++;
+        }
+        
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        
+        while (rs.next())
+        {
+            movie = new Movie();
+            movie.setId(rs.getInt("Id"));
+            movie.setName(rs.getString("Name"));
+            movie.setDirector(rs.getString("Director"));
+            movie.setYear(rs.getInt("Year"));
+            movie.setDescription(rs.getString("Description"));
+            movie.setDuration(rs.getInt("Duration"));
+            
+            comma = ",";
+            String Search_Genres = rs.getString("Genre");
+            List<String> Genre = new ArrayList<>();
+            String []Gnr = Search_Genres.split(comma);
+            
+            Genre.addAll(Arrays.asList(Gnr));
+            movie.setGenre(Genre);
+            
+            movies.add(movie);
+        }
+        
+        return movies;
     }
     
     public void Edit(Movie movie) throws SQLException {

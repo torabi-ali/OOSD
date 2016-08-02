@@ -23,10 +23,10 @@ public class MovieController {
         movie.setId(input.nextInt());
         
         System.out.println("Enter Name:");
-        movie.setName(input.next());
+        movie.setName(input.nextLine());
         
         System.out.println("Enter Director:");
-        movie.setDirector(input.next());
+        movie.setDirector(input.nextLine());
         
         System.out.println("Enter Year:");
         movie.setYear(input.nextInt());
@@ -59,7 +59,7 @@ public class MovieController {
         movie.setDuration(input.nextInt());
         
         System.out.println("Enter Description:");
-        movie.setDescription(input.next());
+        movie.setDescription(input.nextLine());
         
         db.Save(movie);
         
@@ -85,25 +85,26 @@ public class MovieController {
 
     }
     
-    public Movie Search() {
+    public void Search() {
         this.movie = new Movie();
         char gnr = 'y';
+        List<Movie> movies = new ArrayList<Movie>();
         System.out.println("Fill the Fieds You Want to Search");
         
         System.out.println("Now Enter the Values ...\nPlace \'0\' or enter the new value");
         
         System.out.println("Enter Name:");
-        String Name = input.next();
+        String Name = input.nextLine();
         if(!Name.equals("0"))
         {
-            movie.setName(input.next());
+            movie.setName(Name);
         }
         
         System.out.println("Enter Director:");
-        String Director = input.next();
+        String Director = input.nextLine();
         if(!Director.equals("0"))
         {
-            movie.setDirector(input.next());
+            movie.setDirector(Director);
         }
         
         System.out.println("Enter Year:");
@@ -113,12 +114,12 @@ public class MovieController {
             movie.setYear(Year);
         }
         
+        System.out.println("Enter Genre:");
         List<String> genres = new ArrayList<>();
-        String Genre1 = input.next();
-        if(!Genre1.equals("0"))
+        String Genre = input.next();
+        if(!Genre.equals("0"))
         {
-            System.out.println("Enter Genre:");
-            genres.add(Genre1);
+            genres.add(Genre);
         
             while (gnr == 'y' || gnr == 'Y')
             {
@@ -148,14 +149,11 @@ public class MovieController {
             movie.setDuration(Duration);
         }
         
-        System.out.println("Enter Description:");
-        String Description = input.next();
-        if(!Description.equals("0"))
-        {
-            movie.setDescription(Description);
-        }
+        //movies.add(db.Search(movie));
         
-        return movie;
+        //System.out.println(Arrays.toString(movies.toArray()));
+        
+        System.out.println(db.Search(movie));
     }
     
     public void Edit() {
