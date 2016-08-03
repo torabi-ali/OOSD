@@ -4,14 +4,15 @@ import java.util.Scanner;
 import static oosd.OOSD.db;
 
 public class AccountController {
+
     Scanner input;
     Account account;
-    
+
     public AccountController() {
         this.input = new Scanner(System.in);
         this.account = new Account();
     }
-    
+
     public Account Login() {
         int Id;
         System.out.println("Enter your ID:");
@@ -22,26 +23,22 @@ public class AccountController {
         System.out.println("Enter your Password:");
         Password = input.next();
         account.setPassword(Password);
-        
+
         account = db.ReadAccount(Id);
-        
-        if(account.getId() > 0)
-        {
-            if (account.getPassword().equals(Password))
-            {
+
+        if (account.getId() > 0) {
+            if (account.getPassword().equals(Password)) {
                 System.out.println("You are Logged in :)");
                 return account;
             }
             System.out.println("The Username or Password was not correct");
-        }
-        else
-        {
+        } else {
             System.out.println("The Username not found");
         }
         return null;
     }
-    
-    public void SignUp() {        
+
+    public void SignUp() {
         int Id;
         System.out.println("Enter your ID:");
         Id = input.nextInt();
@@ -51,19 +48,19 @@ public class AccountController {
         System.out.println("Enter your Password:");
         Password = input.next();
         account.setPassword(Password);
-        
+
         String FirstName;
         System.out.println("Enter your FirstName:");
         FirstName = input.next();
         account.setFirstName(FirstName);
-        
+
         String LastName;
         System.out.println("Enter your LastName:");
         LastName = input.next();
         account.setLastName(LastName);
-        
+
         db.Save(account);
-        
+
         System.out.println("you are signed up completely ...");
     }
 }

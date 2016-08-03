@@ -1,6 +1,7 @@
 package oosd;
 
 public class Account {
+
     private int Id;
     private String Password;
     private String FirstName;
@@ -46,7 +47,7 @@ public class Account {
     public void setLastName(String LastName) {
         this.LastName = LastName;
     }
-    
+
     public int getScore() {
         return Score;
     }
@@ -54,14 +55,14 @@ public class Account {
     public void setScore(int Score) {
         this.Score = Score;
     }
-    
+
     @Override
     public String toString() {
-      return "\n------------------------------"+
-             "\nID: "+ getId()+
-             "\nName: "+ getFirstName()+
-             "\nYear: "+ getLastName()+
-             "\nDirector: "+ getScore()+
-             "\n------------------------------\n";
-    }    
+        return "\n------------------------------"
+                + "\nID: " + getId()
+                + "\nFirstName: " + getFirstName()
+                + "\nLastName: " + getLastName()
+                + "\nScore: " + getScore()
+                + "\n------------------------------\n";
+    }
 }

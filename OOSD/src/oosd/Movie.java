@@ -12,7 +12,7 @@ public class Movie {
     private int Duration;
     private String Director;
     private String Description;
-    
+
     public Movie() {
         Id = 0;
         Name = null;
@@ -20,10 +20,9 @@ public class Movie {
         Year = 0;
         Genre = new ArrayList<>();
         Genre = null;
-        Duration = 0;        
+        Duration = 0;
         Description = null;
     }
-
 
     public int getId() {
         return Id;
@@ -32,7 +31,7 @@ public class Movie {
     public void setId(int Id) {
         this.Id = Id;
     }
-    
+
     public String getName() {
         return Name;
     }
@@ -80,17 +79,17 @@ public class Movie {
     public void setDescription(String Description) {
         this.Description = Description;
     }
-    
+
     @Override
     public String toString() {
-      return "\n------------------------------"+
-             "\nID: "+ getId()+
-             "\nName: "+ getName()+
-             "\nYear: "+ getYear()+
-             "\nDirector: "+ getDirector()+
-             "\nGenre: "+ getGenre()+
-             "\nDuration: "+ getDuration()+
-             "\nDescription: "+ getDescription()+
-             "\n------------------------------\n";
+        return "\n------------------------------"
+                + "\nID: " + getId()
+                + "\nName: " + getName()
+                + "\nYear: " + getYear()
+                + "\nDirector: " + getDirector()
+                + "\nGenre: " + getGenre()
+                + "\nDuration: " + getDuration()
+                + "\nDescription: " + getDescription()
+                + "\n------------------------------\n";
     }
 }
