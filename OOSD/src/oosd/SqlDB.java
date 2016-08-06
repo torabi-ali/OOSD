@@ -210,7 +210,7 @@ public class SqlDB {
         return movies;
     }
 
-    public void Edit(Movie movie) throws SQLException {
+    public void Edit(Movie movie) {
         System.out.println("Saving ...");
 
         String comma = "";
@@ -224,35 +224,67 @@ public class SqlDB {
         query = "update Movies set Name = ?, Year = ?, Genre = ?, Duration = ?, "
                 + "Director = ?, Description = ? where id = ?";
 
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-        preparedStmt.setString(1, movie.getName());
-        preparedStmt.setInt(2, movie.getYear());
-        preparedStmt.setString(3, allGenres.toString());
-        preparedStmt.setInt(4, movie.getDuration());
-        preparedStmt.setString(5, movie.getDirector());
-        preparedStmt.setString(6, movie.getDescription());
-        preparedStmt.setInt(7, movie.getId());
+        PreparedStatement preparedStmt;
+        try {
+            preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, movie.getName());
+            preparedStmt.setInt(2, movie.getYear());
+            preparedStmt.setString(3, allGenres.toString());
+            preparedStmt.setInt(4, movie.getDuration());
+            preparedStmt.setString(5, movie.getDirector());
+            preparedStmt.setString(6, movie.getDescription());
+            preparedStmt.setInt(7, movie.getId());
 
-        preparedStmt.executeUpdate();
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
-    public void Save(Account user) throws SQLException {
+    public void Edit(Account account) {
         System.out.println("Saving ...");
 
-        query = "insert into Users (Password, FirstName, LastName, Score)"
-                + " values (?, ?, ?, ?)";
+        query = "update Account set Id = ?, FirstName = ?, LastName = ?, Password = ?, "
+                + "Score = ?, Role = ?";
 
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-        preparedStmt.setString(1, user.getPassword());
-        preparedStmt.setString(2, user.getFirstName());
-        preparedStmt.setString(3, user.getLastName());
-        preparedStmt.setInt(4, user.getScore());
+        PreparedStatement preparedStmt;
+        try {
+            preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setInt(1, account.getId());
+            preparedStmt.setString(2, account.getLastName());
+            preparedStmt.setString(3, account.getPassword());
+            preparedStmt.setInt(4, account.getScore());
+            preparedStmt.setInt(5, account.getRoleId());
 
-        preparedStmt.execute();
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void Save(Movie movie) throws SQLException {
+    public void Save(Account user) {
+        System.out.println("Saving ...");
+
+        query = "insert into Users (Password, FirstName, LastName, Score, Role)"
+                + " values (?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStmt;
+        try {
+            preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, user.getPassword());
+            preparedStmt.setString(2, user.getFirstName());
+            preparedStmt.setString(3, user.getLastName());
+            preparedStmt.setInt(4, user.getScore());
+            preparedStmt.setInt(5, user.getRoleId());
+
+            preparedStmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void Save(Movie movie) {
         System.out.println("Saving ...");
 
         String comma = "";
@@ -266,14 +298,34 @@ public class SqlDB {
         query = "insert into Movies (Name, Year, Genre, Duration, Director, Description)"
                 + " values (?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-        preparedStmt.setString(1, movie.getName());
-        preparedStmt.setInt(2, movie.getYear());
-        preparedStmt.setString(3, allGenres.toString());
-        preparedStmt.setInt(4, movie.getDuration());
-        preparedStmt.setString(5, movie.getDirector());
-        preparedStmt.setString(6, movie.getDescription());
+        PreparedStatement preparedStmt;
+        try {
+            preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, movie.getName());
+            preparedStmt.setInt(2, movie.getYear());
+            preparedStmt.setString(3, allGenres.toString());
+            preparedStmt.setInt(4, movie.getDuration());
+            preparedStmt.setString(5, movie.getDirector());
+            preparedStmt.setString(6, movie.getDescription());
 
-        preparedStmt.execute();
+            preparedStmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<String> getRole() throws SQLException {
+        List<String> Role = new ArrayList<String>();
+
+        query = "Select Role From UserRole";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        while (rs.next()) {
+            Role.add(rs.getNString("Role"));
+        }
+
+        return Role;
     }
 }

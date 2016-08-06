@@ -47,7 +47,7 @@ public class DBDriver {
     }
 
     public Object ReadAllMovies() {
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
 
         try {
             movies = (List<Movie>) sql.ReadAllMovies();
@@ -59,15 +59,12 @@ public class DBDriver {
     }
 
     public Object ImportMovies() {
-        List<Movie> movies = new ArrayList<Movie>();
 
-        movies = (List<Movie>) json.ImportMovie();
-
-        return movies;
+        return (List<Movie>) json.ImportMovie();
     }
 
     public Object Search(Movie movie) {
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
 
         try {
             movies = (List<Movie>) sql.Search(movie);
@@ -79,30 +76,28 @@ public class DBDriver {
     }
 
     public void Edit(Movie movie) {
-        try {
-            sql.Edit(movie);
-        } catch (SQLException ex) {
-            Logger.getLogger(DBDriver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sql.Edit(movie);
     }
 
     public void Save(Movie movie) {
         json.Save(movie);
 
-        try {
-            sql.Save(movie);
-        } catch (SQLException ex) {
-            Logger.getLogger(MovieController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sql.Save(movie);
     }
 
     public void Save(Account account) {
         json.Save(account);
 
+        sql.Save(account);
+    }
+
+    public List<String> GetRole() {
         try {
-            sql.Save(account);
+            return sql.getRole();
         } catch (SQLException ex) {
-            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBDriver.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("oosd.DBDriver.GetRole()");
+        return null;
     }
 }

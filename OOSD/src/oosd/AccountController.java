@@ -7,10 +7,12 @@ public class AccountController {
 
     Scanner input;
     Account account;
+    UserRole userRole;
 
     public AccountController() {
         this.input = new Scanner(System.in);
         this.account = new Account();
+        this.userRole = new UserRole();
     }
 
     public Account Login() {
@@ -58,6 +60,8 @@ public class AccountController {
         System.out.println("Enter your LastName:");
         LastName = input.next();
         account.setLastName(LastName);
+
+        account.setRoleId(userRole.getRole().indexOf("User"));
 
         db.Save(account);
 

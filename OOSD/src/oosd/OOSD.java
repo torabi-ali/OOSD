@@ -50,7 +50,11 @@ public class OOSD {
                 }
                 break;
             case 5:
-                accountController.Login();
+                if (accountController.account.getId() > 0) {
+                    accountController.Login();
+                } else {
+
+                }
                 main(args);
                 break;
             case 6:
@@ -78,7 +82,7 @@ public class OOSD {
         System.out.println("2 - Edit Movie");
         System.out.println("3 - Import From Json");
         System.out.println("4 - Search");
-        System.out.println("5 - Login");
+        System.out.println("5 - Account");
         System.out.println("6 - Sign Up");
         System.out.println("7 - Quit");
         System.out.println("< ------------------------- >");

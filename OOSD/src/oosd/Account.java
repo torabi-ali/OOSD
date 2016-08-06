@@ -7,6 +7,9 @@ public class Account {
     private String FirstName;
     private String LastName;
     private int Score;
+    private int RoleId;
+
+    private final UserRole usrRole = new UserRole();
 
     public Account() {
         this.Id = 0;
@@ -14,6 +17,7 @@ public class Account {
         this.FirstName = null;
         this.LastName = null;
         this.Score = 0;
+        this.RoleId = usrRole.getRole().indexOf("Null");
     }
 
     public int getId() {
@@ -54,6 +58,14 @@ public class Account {
 
     public void setScore(int Score) {
         this.Score = Score;
+    }
+
+    public int getRoleId() {
+        return RoleId;
+    }
+
+    public void setRoleId(int RoleId) {
+        this.RoleId = RoleId;
     }
 
     @Override
