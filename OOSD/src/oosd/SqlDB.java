@@ -308,17 +308,18 @@ public class SqlDB {
     public void Save(Account user) {
         System.out.println("Saving ...");
 
-        query = "insert into Users (Password, FirstName, LastName, Score, Role)"
-                + " values (?, ?, ?, ?, ?)";
+        query = "insert into Users (Id, Password, FirstName, LastName, Score, Role)"
+                + " values (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStmt;
         try {
             preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, user.getPassword());
-            preparedStmt.setString(2, user.getFirstName());
-            preparedStmt.setString(3, user.getLastName());
-            preparedStmt.setInt(4, user.getScore());
-            preparedStmt.setInt(5, user.getRoleId());
+            preparedStmt.setInt(1, user.getId());
+            preparedStmt.setString(2, user.getPassword());
+            preparedStmt.setString(3, user.getFirstName());
+            preparedStmt.setString(4, user.getLastName());
+            preparedStmt.setInt(5, user.getScore());
+            preparedStmt.setInt(6, user.getRoleId());
 
             preparedStmt.execute();
         } catch (SQLException ex) {

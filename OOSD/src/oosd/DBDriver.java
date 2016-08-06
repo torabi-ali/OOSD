@@ -115,6 +115,14 @@ public class DBDriver {
 
     /**
      *
+     * @param account
+     */
+    public void Edit(Account account) {
+        sql.Edit(account);
+    }
+
+    /**
+     *
      * @param movie
      */
     public void Save(Movie movie) {

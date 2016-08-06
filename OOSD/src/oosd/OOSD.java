@@ -22,28 +22,26 @@ public class OOSD {
 
         switch (userChoice) {
             case 1:
-                if (accountController.account.getId() > 0) {
-                    movieController.AddMovie();
-                    main(args);
-                } else {
+                while (accountController.account.getId() <= 0) {
                     System.out.println("First you must sign in");
                     accountController.Login();
-                    movieController.AddMovie();
-                    main(args);
                 }
+                movieController.AddMovie();
+                main(args);
                 break;
             case 2:
-                if (accountController.account.getId() > 0) {
-                    movieController.Edit();
-                    main(args);
-                } else {
+                while (accountController.account.getId() <= 0) {
                     System.out.println("First you must sign in");
                     accountController.Login();
-                    movieController.Edit();
-                    main(args);
                 }
+                movieController.Edit();
+                main(args);
                 break;
             case 3:
+                while (accountController.account.getId() <= 0) {
+                    System.out.println("First you must sign in");
+                    accountController.Login();
+                }
                 movieController.Import();
                 main(args);
                 break;
@@ -61,7 +59,7 @@ public class OOSD {
                 if (accountController.account.getId() > 0) {
                     accountController.Login();
                 } else {
-
+                    accountController.Edit();
                 }
                 main(args);
                 break;
@@ -69,6 +67,7 @@ public class OOSD {
                 accountController.SignUp();
                 System.out.println("Please Login ...");
                 accountController.Login();
+                main(args);
                 break;
             case 7:
                 System.out.println("Hope to see you soon :)");

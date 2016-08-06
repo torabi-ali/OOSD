@@ -30,9 +30,6 @@ public class MovieController {
         this.movie = new Movie();
         char gnr = 'y';
 
-        System.out.println("Enter Id:");
-        movie.setId(input.nextInt());
-
         System.out.println("Enter Name:");
         movie.setName(input.nextLine());
 

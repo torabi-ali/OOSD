@@ -52,6 +52,51 @@ public class AccountController {
     }
 
     /**
+     *
+     * @return
+     */
+    public Account Read() {
+        System.out.println("Enter Id:");
+        int Id = input.nextInt();
+
+        account = db.ReadAccount(Id);
+
+        return account;
+    }
+
+    /**
+     * Edit
+     */
+    public void Edit() {
+        account = Read();
+        account.toString();
+
+        System.out.println("Now Enter the new Values ...\nPlace \'0\' or enter the new value");
+
+        System.out.println("Enter Password:");
+        String Password = input.next();
+        if (!Password.equals("0")) {
+            account.setPassword(Password);
+        }
+
+        System.out.println("Enter FirstName:");
+        String FirstName = input.next();
+        if (!FirstName.equals("0")) {
+            account.setPassword(FirstName);
+        }
+
+        System.out.println("Enter LastName:");
+        String LastName = input.next();
+        if (!LastName.equals("0")) {
+            account.setPassword(LastName);
+        }
+
+        db.Edit(account);
+
+        System.out.println("you're account is now modified ...");
+    }
+
+    /**
      * Sign Up
      */
     public void SignUp() {
@@ -75,10 +120,11 @@ public class AccountController {
         LastName = input.next();
         account.setLastName(LastName);
 
-        account.setRoleId(userRole.getRole().indexOf("User"));
+        //account.setRoleId(userRole.getRole().indexOf("User"));
+        account.setRoleId(1);
 
         db.Save(account);
 
-        System.out.println("you are signed up completely ...");
+        System.out.println("you are signed up seccessfully ...");
     }
 }
