@@ -3,18 +3,29 @@ package oosd;
 import java.util.Scanner;
 import static oosd.OOSD.db;
 
+/**
+ *
+ * @author ali
+ */
 public class AccountController {
 
     Scanner input;
     Account account;
     UserRole userRole;
 
+    /**
+     * Constructor
+     */
     public AccountController() {
         this.input = new Scanner(System.in);
         this.account = new Account();
         this.userRole = new UserRole();
     }
 
+    /**
+     *
+     * @return
+     */
     public Account Login() {
         int Id;
         System.out.println("Enter your ID:");
@@ -40,6 +51,9 @@ public class AccountController {
         return null;
     }
 
+    /**
+     * Sign Up
+     */
     public void SignUp() {
         int Id;
         System.out.println("Enter your ID:");

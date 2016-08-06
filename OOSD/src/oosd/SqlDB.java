@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author ali
+ */
 public class SqlDB {
 
     private static String JDBC_DRIVER;
@@ -19,6 +23,9 @@ public class SqlDB {
     Account account;
     Movie movie;
 
+    /**
+     * Constructor
+     */
     public SqlDB() {
         this.query = null;
         this.conn = null;
@@ -48,6 +55,12 @@ public class SqlDB {
         }
     }
 
+    /**
+     *
+     * @param Id
+     * @return
+     * @throws SQLException
+     */
     public Account ReadAccount(int Id) throws SQLException {
         System.out.println("Loading ...");
 
@@ -68,8 +81,13 @@ public class SqlDB {
         return account;
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public Object ReadAllMovies() throws SQLException {
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
 
         query = "select * from Movies";
 
@@ -99,6 +117,12 @@ public class SqlDB {
         return movies;
     }
 
+    /**
+     *
+     * @param Id
+     * @return
+     * @throws SQLException
+     */
     public Movie ReadMovie(int Id) throws SQLException {
         System.out.println("Loading ...");
 
@@ -128,8 +152,14 @@ public class SqlDB {
         return movie;
     }
 
+    /**
+     *
+     * @param movie
+     * @return
+     * @throws SQLException
+     */
     public Object Search(Movie movie) throws SQLException {
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
         int counter = 0;
         System.out.println("Saving ...");
 
@@ -210,6 +240,10 @@ public class SqlDB {
         return movies;
     }
 
+    /**
+     *
+     * @param movie
+     */
     public void Edit(Movie movie) {
         System.out.println("Saving ...");
 
@@ -242,6 +276,10 @@ public class SqlDB {
 
     }
 
+    /**
+     *
+     * @param account
+     */
     public void Edit(Account account) {
         System.out.println("Saving ...");
 
@@ -263,6 +301,10 @@ public class SqlDB {
         }
     }
 
+    /**
+     *
+     * @param user
+     */
     public void Save(Account user) {
         System.out.println("Saving ...");
 
@@ -284,6 +326,10 @@ public class SqlDB {
         }
     }
 
+    /**
+     *
+     * @param movie
+     */
     public void Save(Movie movie) {
         System.out.println("Saving ...");
 
@@ -314,8 +360,13 @@ public class SqlDB {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<String> getRole() throws SQLException {
-        List<String> Role = new ArrayList<String>();
+        List<String> Role = new ArrayList<>();
 
         query = "Select Role From UserRole";
 

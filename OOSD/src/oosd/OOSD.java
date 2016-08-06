@@ -2,12 +2,20 @@ package oosd;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author ali
+ */
 public class OOSD {
 
     static final AccountController accountController = new AccountController();
     static final MovieController movieController = new MovieController();
     static final DBDriver db = new DBDriver();
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         int userChoice;
         userChoice = menu();
@@ -72,6 +80,10 @@ public class OOSD {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static int menu() {
 
         int selection;

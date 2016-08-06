@@ -24,7 +24,7 @@ public class JsonDB {
     private String addr;
 
     /**
-     *
+     * Constructor
      */
     public JsonDB() {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
@@ -59,11 +59,11 @@ public class JsonDB {
     public Object ImportMovie() {
         System.out.println("Loading Movies From Json ...");
 
-        List<Movie> movies = new ArrayList<Movie>();
-        Movie movie = new Movie();
+        List<Movie> movies = new ArrayList<>();
         addr = "database/import.json";
 
         try {
+            Movie movie = new Movie();
             JsonReader reader = new JsonReader(new FileReader(addr));
             movie = gson.fromJson(reader, Movie.class);
             movies.add(movie);

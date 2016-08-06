@@ -6,16 +6,26 @@ import java.util.List;
 import java.util.Scanner;
 import static oosd.OOSD.db;
 
+/**
+ *
+ * @author ali
+ */
 public class MovieController {
 
     Scanner input;
     Movie movie;
 
+    /**
+     * Constructor
+     */
     public MovieController() {
         this.input = new Scanner(System.in);
         this.movie = new Movie();
     }
 
+    /**
+     * Add Movie
+     */
     public void AddMovie() {
         this.movie = new Movie();
         char gnr = 'y';
@@ -66,6 +76,10 @@ public class MovieController {
         System.out.println("The Movie Added ...");
     }
 
+    /**
+     *
+     * @return
+     */
     public Movie Read() {
         System.out.println("Enter Id:");
         int Id = input.nextInt();
@@ -75,19 +89,24 @@ public class MovieController {
         return movie;
     }
 
+    /**
+     * Read All Movies
+     */
     public void ReadAll() {
         System.out.println("Here are the whole movies:");
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
 
         movies = (List<Movie>) db.ReadAllMovies();
 
         System.out.println(Arrays.toString(movies.toArray()));
-
     }
 
+    /**
+     * Import From Json
+     */
     public void Import() {
         System.out.println("Here are the whole movies:");
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
 
         movies = (List<Movie>) db.ImportMovies();
 
@@ -95,6 +114,9 @@ public class MovieController {
 
     }
 
+    /**
+     * Search (as User)
+     */
     public void Search() {
         this.movie = new Movie();
         char gnr = 'y';
@@ -155,6 +177,9 @@ public class MovieController {
         System.out.println(db.Search(movie));
     }
 
+    /**
+     * Search (as Guest)
+     */
     public void SearchGuest() {
         this.movie = new Movie();
 
@@ -164,6 +189,9 @@ public class MovieController {
         System.out.println(db.Search(movie));
     }
 
+    /**
+     * Edit a Movie
+     */
     public void Edit() {
         char gnr = 'y';
         movie = Read();
