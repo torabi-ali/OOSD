@@ -3,11 +3,13 @@ package oosd;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,12 +64,21 @@ public class JsonDB {
         List<Movie> movies = new ArrayList<>();
         addr = "database/import.json";
 
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = null;
         try {
-            Movie movie = new Movie();
-            JsonReader reader = new JsonReader(new FileReader(addr));
-            movie = gson.fromJson(reader, Movie.class);
-            movies.add(movie);
+            br = new BufferedReader(new FileReader(addr));
         } catch (FileNotFoundException ex) {
+            Logger.getLogger(JsonDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String buffer;
+        Movie movie = new Movie();
+        try {
+            while ((buffer = br.readLine()) != null) {
+                movie = gson.fromJson(buffer, Movie.class);
+                movies.add(movie);
+            }
+        } catch (IOException ex) {
             Logger.getLogger(JsonDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return movies;
